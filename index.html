@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Google Sem Backend</title>
+  <!-- Adicione a biblioteca de autenticação do Google -->
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="54481010119-rg72jpv6s4coego70too6ugm01crbkm0.apps.googleusercontent.com">
+</head>
+<body>
+  <!-- Botão de Login -->
+  <div id="loginButton">
+    <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  </div>
+
+  <!-- Espaço para exibir informações do usuário logado -->
+  <div id="userDetails"></div>
+
+  <script>
+    // Função chamada quando o usuário fizer login com sucesso
+    function onSignIn(googleUser) {
+      // Obter informações do usuário autenticado
+      var profile = googleUser.getBasicProfile();
+      
+      // Exibir detalhes do usuário (exemplo: nome, e-mail)
+      document.getElementById('userDetails').innerHTML = 'Nome: ' + profile.getName() + '<br>' +
+                                                          'Email: ' + profile.getEmail();
+    }
+  </script>
+</body>
+</html>
