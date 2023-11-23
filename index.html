@@ -18,14 +18,19 @@
 
   <script>
     // Função chamada quando o usuário fizer login com sucesso
-    function onSignIn(googleUser) {
-      // Obter informações do usuário autenticado
-      var profile = googleUser.getBasicProfile();
-      
-      // Exibir detalhes do usuário (exemplo: nome, e-mail)
-      document.getElementById('userDetails').innerHTML = 'Nome: ' + profile.getName() + '<br>' +
-      alert(profile.getName())                                                    'Email: ' + profile.getEmail();
-    }
+function onSignIn(googleUser) {
+  // Obter informações do usuário autenticado
+  var profile = googleUser.getBasicProfile();
+  
+  // Exibir detalhes do usuário (exemplo: nome, e-mail)
+  document.getElementById('userDetails').innerHTML = 'Nome: ' + profile.getName() + '<br>' +
+                                                      'Email: ' + profile.getEmail();
+
+  // Redirecionar para outra página após 2 segundos (exemplo)
+  setTimeout(function() {
+    window.location.href = 'https://youtube.com;
+  }, 2000); // Redireciona após 2 segundos (altere o tempo conforme necessário)
+}
   </script>
 </body>
 </html>
