@@ -33,6 +33,7 @@ h2 {
 <script>
   function onSignIn(googleUser) {
   var profile = googleUser.getBasicProfile();
+  alert(profile.getName())
   console.log('Name: ' + profile.getName());
   console.log('Image URL: ' + profile.getImageUrl());
   console.log('Email: ' + profile.getEmail());
