@@ -1,38 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
+<style>
+  .g-signin2 {
+  margin-left : 300px;
+}
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google login</title>
+.well {
+  text-align : center;
+   margin-right : 20%;
+  margin-left : 20%;
+}
 
-  <link rel="stylesheet" href="style.css">
+a:link {
+  text-decoration : none;
+  font-family : Station Medium;
+  font-size:24px;
+}
 
-  <script src="https://accounts.google.com/gsi/client" async defer></script>
-  <script src="https://unpkg.com/jwt-decode/build/jwt-decode.js"></script>
-  <script src="main.js"></script>
+h2 {
+  text-align : center;
+  font-family : Station Medium;
+}
+</style>
 
-</head>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id" content="54481010119-rg72jpv6s4coego70too6ugm01crbkm0.apps.googleusercontent.com">
+<h2> Login to Google from this page! </h2><br><br>
+<div class="well">
+ <div class="g-signin2" data-onsuccess="onSignIn" data-width="240" data-height="50" data-longtitle="true"></div> 
+  <br><br>
+ <a href="#" onclick="signOut();">Sign out of Google</a>
+</div>
 
-<body>
-  <div class="container">
-    <h1>Cole em suas URL permitidas:</h1>
-    <ul>
-      <li>https://google-login-example.netlify.app</li>
-    </ul>
-    <hr>
-    <div id="buttonDiv"></div>
+<script>
+  function onSignIn(googleUser) {
+  var profile = googleUser.getBasicProfile();
+  console.log('Name: ' + profile.getName());
+  console.log('Image URL: ' + profile.getImageUrl());
+  console.log('Email: ' + profile.getEmail());
+}
 
-    <p id="fullName"></p>
-    <p id="sub"></p>
-    <p id="given_name"></p>
-    <p id="family_name"></p>
-    <p id="email"></p>
-    <p id="verifiedEmail"></p>
-    <img id="picture" />
-  </div>
+function signOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+    });
+  }
+</script>
 
-</body>
 
-</html>
