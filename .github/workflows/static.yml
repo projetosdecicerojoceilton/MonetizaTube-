@@ -21,6 +21,10 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+  
+env:
+  GOOGLE_CLIENT_ID: 54481010119-3v2pp9ggi9186qkob56ckdhvter2k7a2.apps.googleusercontent.com
+
 jobs:
   # Single deploy job since we're just deploying
   deploy:
