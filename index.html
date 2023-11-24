@@ -15,7 +15,7 @@
             console.log(googleUser.Zi.access_token);
         }
     </script>
-    <meta name="google-signin-client_id" content="54481010119-3v2pp9ggi9186qkob56ckdhvter2k7a2.apps.googleusercontent.com">
+    <meta name="google-signin-client_id" content="{{ env('GOOGLE_CLIENT_ID') }}.apps.googleusercontent.com">
   </head>
   <body>
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
