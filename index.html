@@ -5,4 +5,11 @@
 <body>
   <h1>Welcome to the Demo</h1>
   <div class="g-signin2"></div>
+  <div class="g-signin2" data-onsuccess="onSignIn"></div>
+  <script>
+    function onSignIn(googleUser) {
+      // get user profile information
+      console.log(googleUser.getBasicProfile())
+    }
+  </script>
 </body>
