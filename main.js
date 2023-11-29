@@ -25,8 +25,8 @@
           window.onYouTubeIframeAPIReady = function () {
             const videoPlayer = document.getElementById('player'); // Elemento onde o player será inserido
             const player = new YT.Player(videoPlayer, {
-              height:220,
-              width: 250,
+              height:320,
+              width: 350,
               playerVars: {
                 autoplay: 1,
                 enablejsapi: 1
