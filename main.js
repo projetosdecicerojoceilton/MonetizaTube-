@@ -60,12 +60,13 @@
 
                        exibeMsg = true
                          
-                       count ++
+                       
                          
                        }
                        if (event.data === YT.PlayerState.ENDED) {
                           playVideo(index + 1);
                           exibeMsg = false
+                          count ++
                         }
                       });
                     } else {
