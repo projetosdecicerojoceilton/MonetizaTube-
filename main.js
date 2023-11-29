@@ -1,35 +1,75 @@
-function handleCredentialResponse(response) {
-  const data = jwt_decode(response.credential)
+ window.onload = function() {
+   
+   let msg = document.getElementById("msg")
+   
+  function listarEExecutarVideos(linkPlaylist) {
+    const regex = /[?&]list=([^&]+)/;
+    const match = linkPlaylist.match(regex);
 
-  fullName.textContent = data.name
-  sub.textContent = data.sub
-  given_name.textContent = data.given_name
-  family_name.textContent = data.family_name
-  email.textContent = data.email
-  verifiedEmail.textContent = data.email_verified
-  picture.setAttribute("src", data.picture)
-}
+    if (match && match[1]) {
+      const playlistId = match[1];
+      const key = 'AIzaSyCamz33adD2c_cSenIF85h1WiQCanF2jsc';
+      const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&playlistId=${playlistId}&key=${key}`;
 
-window.onload = function () {
-  const clientID = '54481010119-rg72jpv6s4coego70too6ugm01crbkm0.apps.googleusercontent.com'
-    
-    //window.prompt("Cole a sua Cliente ID", "")
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          const videoIds = data.items.map(item => item.snippet.resourceId.videoId);
+          let currentIndex = 0;
 
-  google.accounts.id.initialize({
-    client_id: clientID,
-    callback: handleCredentialResponse
-  });
+          const tag = document.createElement('script');
+          tag.src = 'https://www.youtube.com/iframe_api';
+          const firstScriptTag = document.getElementsByTagName('script')[0];
+          firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  google.accounts.id.renderButton(
-    document.getElementById("buttonDiv"), {
-    theme: "filled_black",
-    size: "large",
-    type: "standard",
-    shape: "pill",
-    locale: "pt-BR",
-    logo_alignment: "left",
-  } // customization attributes
-  );
+          window.onYouTubeIframeAPIReady = function () {
+            const videoPlayer = document.getElementById('player'); // Elemento onde o player será inserido
+            const player = new YT.Player(videoPlayer, {
+              height:220,
+              width: 250,
+              playerVars: {
+                autoplay: 1,
+                enablejsapi: 1
+              },
+              events: {
+                onReady: function (event) {
+                  function playVideo(index) {
+                    if (index < videoIds.length) {
+                      event.target.loadVideoById(videoIds[index]);
 
-  google.accounts.id.prompt(); // also display the One Tap dialog
-      }
+                      setTimeout(() => {
+                        event.target.pauseVideo();
+                      msg.innerHTML = `Curta o vídeo ${videoIds[index]}`;
+                      }, 15000);
+                      
+                      setTimeout(()=> {
+                      msg.innerHTML=""
+                      }
+                       ,30000 )
+                      
+
+                      event.target.addEventListener('onStateChange', function (event) {
+                        if (event.data === YT.PlayerState.ENDED) {
+                          playVideo(index + 1);
+                        }
+                      });
+                    } else {
+                      console.log('Todos os vídeos foram reproduzidos.');
+                    }
+                  }
+
+                  playVideo(currentIndex);
+                }
+              }
+            });
+          };
+        })
+        .catch(error => console.error('Erro ao buscar vídeos da playlist:', error));
+    } else {
+      console.error('Link da playlist do YouTube inválido.');
+    }
+  }
+
+  const linkPlaylist = 'https://youtube.com/playlist?list=PL4l12TFbPFPKs8Ob_8qIDUU9JEuhPgDWp&si=VNXqWqVMQdNWODPe';
+  listarEExecutarVideos(linkPlaylist);
+};
