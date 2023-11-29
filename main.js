@@ -37,7 +37,12 @@
                     if (index < videoIds.length) {
                       event.target.loadVideoById(videoIds[index]);
 
-                      setTimeout(() => {
+                      
+               
+
+                      event.target.addEventListener('onStateChange', function (event) {
+                        if (event.data === YT.PlayerState.PLAYING) {
+                          setTimeout(() => {
                         event.target.pauseVideo();
                       msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${videoIds[index]}" target="_blank"> Ir para youtube.com </a>`;
                       }, 15000);
@@ -46,10 +51,8 @@
                       msg.innerHTML=""
                       }
                        ,30000 )
-                      
-
-                      event.target.addEventListener('onStateChange', function (event) {
-                        if (event.data === YT.PlayerState.ENDED) {
+                       }
+                       if (event.data === YT.PlayerState.ENDED) {
                           playVideo(index + 1);
                         }
                       });
