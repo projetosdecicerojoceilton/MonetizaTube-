@@ -1,7 +1,10 @@
  window.onload = function() {
-   
+
+  
    let msg = document.getElementById("msg")
-   
+
+   let exibeMsg = false
+  
   function listarEExecutarVideos(linkPlaylist) {
     const regex = /[?&]list=([^&]+)/;
     const match = linkPlaylist.match(regex);
@@ -41,7 +44,7 @@
                
 
                       event.target.addEventListener('onStateChange', function (event) {
-                        if (event.data === YT.PlayerState.PLAYING) {
+                        if (event.data === YT.PlayerState.PLAYING && exibeMsg == false) {
                           setTimeout(() => {
                         event.target.pauseVideo();
                       msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${videoIds[index]}" target="_blank"> Ir para youtube.com </a>`;
@@ -51,9 +54,13 @@
                       msg.innerHTML=""
                       }
                        ,30000 )
+
+                       exibeMsg = true
+                         
                        }
                        if (event.data === YT.PlayerState.ENDED) {
                           playVideo(index + 1);
+                          exibeMsg = false
                         }
                       });
                     } else {
