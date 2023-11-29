@@ -4,6 +4,8 @@
    let msg = document.getElementById("msg")
 
    let exibeMsg = false
+
+   let count = 0
   
   function listarEExecutarVideos(linkPlaylist) {
     const regex = /[?&]list=([^&]+)/;
@@ -45,9 +47,10 @@
 
                       event.target.addEventListener('onStateChange', function (event) {
                         if (event.data === YT.PlayerState.PLAYING && exibeMsg == false) {
+                         
                           setTimeout(() => {
                         event.target.pauseVideo();
-                      msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${videoIds[index]}" target="_blank"> Ir para youtube.com </a>`;
+                      msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${videoIds[count]}" target="_blank"> Ir para youtube.com </a>`;
                       }, 15000);
                       
                       setTimeout(()=> {
@@ -56,6 +59,8 @@
                        ,30000 )
 
                        exibeMsg = true
+                         
+                       count ++
                          
                        }
                        if (event.data === YT.PlayerState.ENDED) {
