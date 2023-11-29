@@ -1,3 +1,9 @@
 body {
     font-size: 15pt;
 }
+#player {
+    margin: 0 auto;
+}
+#msg {
+    margin: 0 auto;
+}
