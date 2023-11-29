@@ -4,8 +4,6 @@
    let msg = document.getElementById("msg")
 
    let exibeMsg = false
-
-   let count = 0
   
   function listarEExecutarVideos(linkPlaylist) {
     const regex = /[?&]list=([^&]+)/;
@@ -50,7 +48,7 @@
                          
                           setTimeout(() => {
                         event.target.pauseVideo();
-                      msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${videoIds[count]}" target="_blank"> Ir para youtube.com </a>`;
+                      msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${videoIds[index]}" target="_blank"> Ir para youtube.com </a>`;
                       }, 15000);
                       
                       setTimeout(()=> {
