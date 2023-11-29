@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<iframe id="videoIframe" style="width:100%; height:500px;"></iframe>
+  AGUARDE ...
 
 <script>
 /*if (window.opener === null) {
@@ -14,8 +14,6 @@
   console.log('Esta página foi aberta na mesma aba ou janela.');
   return false
 }*/
-
-
   
   // Função para obter parâmetros da URL
   function getParameterByName(name, url) {
@@ -30,13 +28,11 @@
 
   // Obter o ID do vídeo da URL
   var videoId = getParameterByName('v', window.location.href);
+  setTimeout(() => {
+    location.href = `https://youtube.com/watch?v=${videoId}`
+  },1500)
+  
 
-  // Definir o src do iframe com o ID do vídeo
-  if (videoId !== null) {
-    var videoUrl = "https://www.youtube.com/"
-    var iframe = document.getElementById("videoIframe");
-    iframe.src = videoUrl;
-  }
 </script>
 
 </body>
