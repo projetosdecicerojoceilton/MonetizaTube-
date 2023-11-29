@@ -39,7 +39,7 @@
 
                       setTimeout(() => {
                         event.target.pauseVideo();
-                      msg.innerHTML = `Curta o vídeo ${videoIds[index]}`;
+                      msg.innerHTML = `Curta o vídeo <a href="https://youtube.com/whatch?v=${videoIds[index]}"> Ir para youtube.com </a>`;
                       }, 15000);
                       
                       setTimeout(()=> {
