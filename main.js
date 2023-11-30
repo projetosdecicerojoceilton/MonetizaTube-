@@ -51,7 +51,7 @@ window.onload = function() {
     if (index < videoIds.length) {
       const totalVideos = videoIds.length;
       const currentPosition = index + 1;
-      msg.innerHTML = `Vídeo ${currentPosition}/${totalVideos}`;
+      msg.innerHTML = `Vídeo ${currentPosition}/${totalVideos} ${localStorage.getItem('currentVideoIndex')`;
 
       player.loadVideoById(videoIds[index]);
 
