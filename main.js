@@ -47,11 +47,13 @@ window.onload = function() {
               },
               events: {
                 onReady: function (event) {
-                  function playVideo(index) {
-  if (index < videoIds.length) {
-    const totalVideos = videoIds.length;
-    const currentPosition = index + 1;
-    msg.innerHTML = `Vídeo ${currentPosition}/${totalVideos}`;
+                  function playVideo(index, videoIds, player, event) {
+    if (index < videoIds.length) {
+      const totalVideos = videoIds.length;
+      const currentPosition = index + 1;
+      msg.innerHTML = `Vídeo ${currentPosition}/${totalVideos}`;
+
+      player.loadVideoById(videoIds[index]);
 
     event.target.loadVideoById(videoIds[index]);
 
