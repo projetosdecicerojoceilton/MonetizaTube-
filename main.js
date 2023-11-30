@@ -48,8 +48,8 @@ window.onload = function() {
               },
               events: {
                 onReady: function (event) {
+
                   function playVideo(index) {
-                    if (indfunction playVideo(index) {
   if (index < videoIds.length) {
     const totalVideos = videoIds.length;
     const currentPosition = index + 1;
@@ -78,6 +78,9 @@ window.onload = function() {
   } else {
     console.log('Todos os vídeos foram reproduzidos.');
   }
+}
+
+                  
 }
 
 
