@@ -1,24 +1,20 @@
- window.onload = function() {
+window.onload = function() {
 
   
    let msg = document.getElementById("msg")
 
    let exibeMsg = false
   
-  function extractVideoId(String videoUrl) {
-    String videoId = null;
-    if (videoUrl != null && videoUrl.trim().length() > 0) {
-        String[] urlParts = videoUrl.split("v=");
-        if (urlParts.length > 1) {
-            videoId = urlParts[1];
-            int ampersandIndex = videoId.indexOf('&');
-            if (ampersandIndex != -1) {
-                videoId = videoId.substring(0, ampersandIndex);
-            }
+  function extractVideoId(videoUrl) {
+    let videoId = '';
+    if (videoUrl) {
+        let match = videoUrl.match(/[?&]v=([a-zA-Z0-9_-]{11})/);
+        if (match && match[1]) {
+            videoId = match[1];
         }
     }
     return videoId;
-  }
+}
   
   function listarEExecutarVideos(linkPlaylist) {
     const regex = /[?&]list=([^&]+)/;
