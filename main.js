@@ -81,7 +81,7 @@ window.onload = function() {
 }
 
                   
-}
+
 
 
                   playVideo(currentIndex);
@@ -101,4 +101,3 @@ window.onload = function() {
 };
 
 //Gostaria de exibir em que posição do vídeo está tipo 1/4
-
