@@ -1,5 +1,6 @@
 window.onload = function() {
 
+  localStorage.removeItem('currentVideoIndex');
   
    let msg = document.getElementById("msg")
 
