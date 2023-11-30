@@ -71,10 +71,14 @@ window.onload = function() {
       if (event.data === YT.PlayerState.ENDED) {
         playVideo(index + 1);
         exibeMsg = false;
+        // Guarda a posição do vídeo atual no localStorage
+          localStorage.setItem('currentVideoIndex', index + 1);
       }
     });
   } else {
     console.log('Todos os vídeos foram reproduzidos.');
+    // Limpa a posição do vídeo atual do localStorage quando todos os vídeos são reproduzidos
+      localStorage.removeItem('currentVideoIndex');
   }
 }
 
@@ -92,5 +96,8 @@ window.onload = function() {
   }
 
   const linkPlaylist = 'https://youtube.com/playlist?list=PL4l12TFbPFPKs8Ob_8qIDUU9JEuhPgDWp&si=VNXqWqVMQdNWODPe';
-  listarEExecutarVideos(linkPlaylist);
+  const storedIndex = localStorage.getItem('currentVideoIndex');
+  let startIndex = storedIndex ? parseInt(storedIndex) : 0;
+
+  listarEExecutarVideos(linkPlaylist, startIndex);
 };
