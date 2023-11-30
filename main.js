@@ -5,6 +5,21 @@
 
    let exibeMsg = false
   
+  private String extractVideoId(String videoUrl) {
+    String videoId = null;
+    if (videoUrl != null && videoUrl.trim().length() > 0) {
+        String[] urlParts = videoUrl.split("v=");
+        if (urlParts.length > 1) {
+            videoId = urlParts[1];
+            int ampersandIndex = videoId.indexOf('&');
+            if (ampersandIndex != -1) {
+                videoId = videoId.substring(0, ampersandIndex);
+            }
+        }
+    }
+    return videoId;
+  }
+  
   function listarEExecutarVideos(linkPlaylist) {
     const regex = /[?&]list=([^&]+)/;
     const match = linkPlaylist.match(regex);
@@ -48,7 +63,7 @@
                          
                           setTimeout(() => {
                         event.target.pauseVideo();
-                      msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${player.getVideoUrl()}" target="_blank"> Ir para youtube.com </a>`;
+                      msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${extractVideoId(player.getVideoUrl())}" target="_blank"> Ir para youtube.com </a>`;
                       }, 15000);
                       
                       setTimeout(()=> {
