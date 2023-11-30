@@ -69,7 +69,8 @@ window.onload = function() {
         exibeMsg = true;
       }
       if (event.data === YT.PlayerState.ENDED) {
-        playVideo(index + 1);
+        //playVideo(index + 1);
+        playVideo(index + 1, videoIds, player, event);
         exibeMsg = false;
         // Guarda a posição do vídeo atual no localStorage
           localStorage.setItem('currentVideoIndex', index + 1);
