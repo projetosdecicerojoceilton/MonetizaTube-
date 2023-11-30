@@ -1,6 +1,6 @@
+//No código 
 window.onload = function() {
 
-  localStorage.removeItem('currentVideoIndex');
   
    let msg = document.getElementById("msg")
 
@@ -48,45 +48,41 @@ window.onload = function() {
               },
               events: {
                 onReady: function (event) {
-                  function playVideo(index, videoIds, player, event) {
-    if (index < videoIds.length) {
-      const totalVideos = videoIds.length;
-      const currentPosition = index + 1;
-      msg.innerHTML = `Vídeo ${currentPosition}/${totalVideos}`;
+                  function playVideo(index) {
+                    if (index < videoIds.length) {
+                      event.target.loadVideoById(videoIds[index]);
 
-      player.loadVideoById(videoIds[index]);
+                      
+               
 
-    event.target.loadVideoById(videoIds[index]);
+                      event.target.addEventListener('onStateChange', function (event) {
+                        if (event.data === YT.PlayerState.PLAYING && exibeMsg == false) {
+                         
+                          setTimeout(() => {
+                        event.target.pauseVideo();
+                      msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${extractVideoId(player.getVideoUrl())}" target="_blank"> Ir para youtube.com </a>`;
+                      }, 15000);
+                      
+                      setTimeout(()=> {
+                      msg.innerHTML=""
+                      }
+                       ,30000 )
 
-    event.target.addEventListener('onStateChange', function (event) {
-      if (event.data === YT.PlayerState.PLAYING && exibeMsg == false) {
-        alert(localStorage.getItem('currentVideoIndex'))
-        setTimeout(() => {
-          event.target.pauseVideo();
-          msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${extractVideoId(player.getVideoUrl())}" target="_blank"> Ir para youtube.com </a>`;
-        }, 15000);
-
-        setTimeout(() => {
-          msg.innerHTML = "";
-        }, 30000);
-
-        exibeMsg = true;
-      }
-      if (event.data === YT.PlayerState.ENDED) {
-        //playVideo(index + 1);
-        playVideo(index + 1, videoIds, player, event);
-        exibeMsg = false;
-        // Guarda a posição do vídeo atual no localStorage
-          localStorage.setItem('currentVideoIndex', index + 1);
-      }
-    });
-  } else {
-    console.log('Todos os vídeos foram reproduzidos.');
-    // Limpa a posição do vídeo atual do localStorage quando todos os vídeos são reproduzidos
-      localStorage.removeItem('currentVideoIndex');
-  }
-}
-
+                       exibeMsg = true
+                         
+                       
+                         
+                       }
+                       if (event.data === YT.PlayerState.ENDED) {
+                          playVideo(index + 1);
+                          exibeMsg = false
+                          count ++
+                        }
+                      });
+                    } else {
+                      console.log('Todos os vídeos foram reproduzidos.');
+                    }
+                  }
 
                   playVideo(currentIndex);
                 }
@@ -101,8 +97,8 @@ window.onload = function() {
   }
 
   const linkPlaylist = 'https://youtube.com/playlist?list=PL4l12TFbPFPKs8Ob_8qIDUU9JEuhPgDWp&si=VNXqWqVMQdNWODPe';
-  const storedIndex = localStorage.getItem('currentVideoIndex');
-  let startIndex = storedIndex ? parseInt(storedIndex) : 0;
-
-  listarEExecutarVideos(linkPlaylist, startIndex);
+  listarEExecutarVideos(linkPlaylist);
 };
+
+//Gostaria de exibir em que posição do vídeo está tipo 1/4
+
