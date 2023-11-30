@@ -5,7 +5,7 @@
 
    let exibeMsg = false
   
-  private String extractVideoId(String videoUrl) {
+  function extractVideoId(String videoUrl) {
     String videoId = null;
     if (videoUrl != null && videoUrl.trim().length() > 0) {
         String[] urlParts = videoUrl.split("v=");
