@@ -51,7 +51,7 @@ window.onload = function() {
     if (index < videoIds.length) {
       const totalVideos = videoIds.length;
       const currentPosition = index + 1;
-      msg.innerHTML = `Vídeo ${currentPosition}/${totalVideos} ${localStorage.getItem('currentVideoIndex')`;
+      msg.innerHTML = `Vídeo ${currentPosition}/${totalVideos}`;
 
       player.loadVideoById(videoIds[index]);
 
@@ -59,6 +59,7 @@ window.onload = function() {
 
     event.target.addEventListener('onStateChange', function (event) {
       if (event.data === YT.PlayerState.PLAYING && exibeMsg == false) {
+        alert(localStorage.getItem('currentVideoIndex'))
         setTimeout(() => {
           event.target.pauseVideo();
           msg.innerHTML = `Curta o vídeo <a href="youtube-video.html?v=${extractVideoId(player.getVideoUrl())}" target="_blank"> Ir para youtube.com </a>`;
